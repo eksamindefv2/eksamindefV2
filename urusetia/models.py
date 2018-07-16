@@ -20,7 +20,7 @@ class Zon(models.Model):
 	BUOrgChart = models.ForeignKey(Bahagian,on_delete=models.CASCADE)
 
 	def __str__(self):
-		return self.IDZon
+		return str (self.pk)
 		# return self.NamaZon
 		# return self.BUOrgChart
 
