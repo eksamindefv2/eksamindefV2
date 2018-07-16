@@ -25,7 +25,7 @@ SECRET_KEY = '$!6ly=g^ps=gf49pf+)3mv0y#^+w^r4jcv^1dauh(en5b(j3&s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.101.1.122','eksav2.mod.gov.my']
+ALLOWED_HOSTS = ['10.101.1.122','eksav2.mod.gov.my','127.0.0.1']
 
 
 # Application definition
@@ -78,9 +78,16 @@ WSGI_APPLICATION = 'eksav2.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'DBEksa',
+        'USER': 'sa',
+        'PASSWORD': 'cdbdev@2017',
+        'HOST': '10.101.1.100',
+        'PORT': '1433',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 17 for SQL Server',
+        },
+    },
 }
 
 
