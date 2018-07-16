@@ -4,8 +4,8 @@ import pyodbc
 # server = 'myserver,port' # to specify an alternate port
 server = '10.101.1.246' 
 database = 'EDKICT' 
-username = 'sa' 
-password = 'seeDB@2017' 
+username = '' 
+password = '' 
 cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
 cursor = cnxn.cursor()
 
