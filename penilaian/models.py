@@ -1,46 +1,91 @@
 from django.db import models
+import urusetia
+import persediaan
 
-# Create your models here.
-class Komponen(models.Model):
 
 
-	KodKomponen = models.string.Primary('KodKomponen',max_length=3,blank=False,null=False)
-	NamaKomponen = models.string('NamaKomponen',max_length=60,blank=False,null=False)
+class Sesi(models.Model):
+
+
+	BilSesi = models.IntegerField('BilSesi',unique = True,blank=False,null=False)
+	Tahun = models.IntegerField('Tahun',blank=False,null=False)
+	TarikhMula = models.DateField('TarikhMula',max_length=60,blank=False,null=False)
+	TarikhTamat = models.DateField('TarikhTamat',max_length=60,blank=False,null=False)
+	Status = models.CharField('TarikhTamat',max_length=60,blank=False,null=False)
+	TarikhKemaskini = models.DateTimeField('TarikhKemaskini',max_length=60,blank=False,null=False)
+
 
 	def __str__(self):
-		return self.Komponen
-
-class SubKomponen(models.Model):
+		return self.BilSesi
 
 
-	KodSubKomponen = models.string.Primary('Kod Sub Komponen',max_length=3,blank=False,null=False)
-	NamaSubKomponen= models.string('Nama Sub Komponen',max_length=60,blank=False,null=False)
-	KodKomponen = models.string.ForeignKey('Kod Komponen',max_length=3,blank=False,null=False)
-
-	def __str__(self):
-		return self.SubKomponen
-
-class Soalan(models.Model):
+class Jadual(models.Model):
 
 
-	NoSoalan = models.int.Primary('Nombor Soalan',max_length=3,blank=False,null=False)
-	NamaSoalan= models.string('Nama Soalan',max_length=200,blank=False,null=False)
-	KodSubKomponen = models.string.ForeignKey('Kod Sub Komponen',max_length=3,blank=False,null=False)
+	BilJadual = models.IntegerField('BilJadual',unique = True,blank=False,null=False)
+	IDZon = models.ForeignKey('urusetia.Zon',on_delete=models.CASCADE)
+	BilSesi = models.ForeignKey(Sesi,on_delete=models.CASCADE)
+	NamaJuruAudit = models.CharField('NamaJuruAudit',max_length=60,blank=False,null=False)
+	TarikhAudit = models.DateTimeField('TarikhAudit',max_length=60,blank=False,null=False)
+	Status = models.CharField('Status',max_length=60,blank=False,null=False)
+
 
 	def __str__(self):
-		return self.SubKomponen
-		
+		return self.BilJadual		
 
-Class Soalan
-{
-      NoSoalan (int) 3 -Primary Key
-      NamaSoalan (string) 200
-      KodSubKomponen( string) 3 - Foriegn Key 
-}
-Class Jawapan
-{
-    NoJawapan  (int) 3
-    DeskripsiJawapan  (string) 200
-    NoSoalan (int) 3 - Foriegn Key 
-    TarikhKemaskini (date)
-}
+
+class Skor(models.Model):
+
+
+	BilMarkah = models.IntegerField('BilMarkah',unique = True,blank=False,null=False)
+	Markah = models.IntegerField('Markah',blank=False,null=False)
+	TarikhSkor = models.DateTimeField('TarikhSkor',max_length=60,blank=False,null=False)
+	NoSoalan = models.ForeignKey('persediaan.Soalan',on_delete=models.CASCADE)
+	NoJawapan = models.ForeignKey('persediaan.Jawapan',on_delete=models.CASCADE)
+	ICNum = models.ForeignKey('urusetia.Peranan',on_delete=models.CASCADE)
+	Catatan = models.CharField('Catatan',max_length=200,blank=False,null=False)
+	KomenID = models.ForeignKey('Komen',on_delete=models.CASCADE)
+
+	def __str__(self):
+		return str (self.pk)
+
+
+class Komen(models.Model):
+
+	KomenID = models.IntegerField('KomenID',unique = True,blank=False,null=False)
+	Deskripsi = models.CharField('Deskripsi',max_length=200,blank=False,null=False)
+	TarikhKomen = models.DateTimeField('TarikhKomen',max_length=60,blank=False,null=False)
+	ICNum = models.ForeignKey('urusetia.Peranan',on_delete=models.CASCADE)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
