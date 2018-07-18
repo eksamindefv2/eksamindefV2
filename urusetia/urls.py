@@ -6,5 +6,7 @@ urlpatterns = [
     url(r'^index',views.index,name='index'),
     url(r'^dashboard',views.index,name='index'),
     url(r'^user',views.user,name='user'),
+    url(r'^list_json/$',views.bahagian_list_json.as_view(), name="bahagian_list_json"),
+    url(r'^bahagian/$',views.home_json,name='bahagian_home_json'),
 
 ]

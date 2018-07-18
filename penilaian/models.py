@@ -21,11 +21,22 @@ class Sesi(models.Model):
 
 class Jadual(models.Model):
 
+	baru = 'Baru'
+	aktif = 'Aktif'
+	tamat = 'Tamat'
+	disahkan = 'Disahkan'
+
+	JADUAL_CHOICES = (
+		(baru, 'Baru'),
+		(aktif, 'Aktif'),
+		(tamat, 'Tamat'),
+		(disahkan, 'Disahkan'),
+	)
 
 	BilJadual = models.IntegerField('BilJadual',unique = True,blank=False,null=False)
 	IDZon = models.ForeignKey('urusetia.Zon',on_delete=models.CASCADE)
 	BilSesi = models.ForeignKey(Sesi,on_delete=models.CASCADE)
-	NamaJuruAudit = models.CharField('NamaJuruAudit',max_length=60,blank=False,null=False)
+	NamaJuruAudit =  models.ForeignKey('auth.User',on_delete=models.CASCADE)
 	TarikhAudit = models.DateTimeField('TarikhAudit',max_length=60,blank=False,null=False)
 	Status = models.CharField('Status',max_length=60,blank=False,null=False)
 
@@ -42,7 +53,7 @@ class Skor(models.Model):
 	TarikhSkor = models.DateTimeField('TarikhSkor',max_length=60,blank=False,null=False)
 	NoSoalan = models.ForeignKey('persediaan.Soalan',on_delete=models.CASCADE)
 	NoJawapan = models.ForeignKey('persediaan.Jawapan',on_delete=models.CASCADE)
-	ICNum = models.ForeignKey('urusetia.Peranan',on_delete=models.CASCADE)
+	penilai = models.ForeignKey('auth.User',on_delete=models.CASCADE,null=True)
 	Catatan = models.CharField('Catatan',max_length=200,blank=False,null=False)
 	KomenID = models.ForeignKey('Komen',on_delete=models.CASCADE)
 
@@ -55,7 +66,7 @@ class Komen(models.Model):
 	KomenID = models.IntegerField('KomenID',unique = True,blank=False,null=False)
 	Deskripsi = models.CharField('Deskripsi',max_length=200,blank=False,null=False)
 	TarikhKomen = models.DateTimeField('TarikhKomen',max_length=60,blank=False,null=False)
-	ICNum = models.ForeignKey('urusetia.Peranan',on_delete=models.CASCADE)
+	createdby = models.ForeignKey('auth.User',on_delete=models.CASCADE,null=True)
 
 
 

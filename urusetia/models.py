@@ -9,7 +9,7 @@ class Bahagian(models.Model):
 
 
 	def __str__(self):
-		return self.BUOrgChart
+		return str(self.BUOrgChart)
 		# return self.NamaBahagian
 
 
@@ -25,13 +25,5 @@ class Zon(models.Model):
 		# return self.BUOrgChart
 
 
-class Peranan(models.Model):
 
-
-	ICNum = models.IntegerField('ICNum',unique = True,blank=False,null=False)
-	JenisCapaian = models.CharField('JenisCapaian',max_length=60,blank=False,null=False)
-
-
-	def __str__(self):
-		return self.ICNum
 		# return self.NamaBahagian		
