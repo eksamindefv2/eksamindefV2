@@ -52,12 +52,14 @@
         "processing": true,
         "serverSide": true,
         "ajax": '{% url "bahagian_list_json" %}',
-        "columnDefs": [ {
+        "columnDefs": [ 
+        {
           "targets": 3,
+          "orderable": false,
           "render": function ( data, type, full, meta ) {
             return '<a href=' + full[3] +'>'+'Edit'+'</a> | <a href=' + full[4] +'>'+'Delete'+'</a>';
-            
-          }
+            }
+
         } ],
       } );
     } );
