@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib import messages
 # from django.utils import timezone
-# from .forms import MessageForm, SearchForm, StudentForm
+from .forms import BahagianForm
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
@@ -28,13 +28,56 @@ def home_bahagian(request):
     return render(request, 'urusetia/bahagian_json.html')
 
 
+# Tambah Bahagian
+def bahagian_new(request):
+
+    if request.method == "POST":
+        form = BahagianForm(request.POST)
+        if form.is_valid():
+            bahagian = form.save(commit=False)
+            bahagian.save()
+            messages.success(request, "Bahagian " + str(bahagian.NamaBahagian) + " telah dicipta ! ")
+            return redirect(reverse_lazy('bahagian_home_json'))
+    else:
+        form = BahagianForm()
+    print(request.user)
+    return render(request, 'urusetia/bahagian_new.html', {'form': form})
+
+
+# Kemaskini Bahagian
+def bahagian_edit(request,pk):
+
+    bahagian = get_object_or_404(Bahagian, pk=pk)
+    if request.method == "POST":
+        form = BahagianForm(request.POST,instance=bahagian)
+        if form.is_valid():
+            bahagian = form.save(commit=False)
+            bahagian.save()
+            # return redirect('post_detail', pk=post.pk)
+            messages.success(request, "Bahagian " + str(bahagian.NamaBahagian) + " telah dikemaskini! ")
+            return redirect(reverse_lazy('bahagian_home_json'))
+    else:
+        form = BahagianForm(instance=bahagian)
+    
+    return render(request, 'urusetia/bahagian_new.html', {'form': form})
+
+
+# Delete Bahagian
+def bahagian_remove(request,pk):
+
+    bahagian = get_object_or_404(Bahagian, pk=pk)
+    # if request.method == "POST":
+    namaBahagian = bahagian.NamaBahagian
+    bahagian.delete()
+    messages.success(request, "Bahagian : " + str(namaBahagian) + " telah dihapus! ")
+    return redirect(reverse_lazy('bahagian_home_json'))
 
 
 
 # Student JSON list filtering
 class bahagian_list_json(BaseDatatableView):
     # order_columns = ['bil','namaBahagian','editLink', 'deletelink','pk']
-    order_columns = ['id','NamaBahagian','BUOrgChart','Tindakan']
+    order_columns = ['id','NamaBahagian','BUOrgChart','editLink','deletelink']
 
     def get_initial_queryset(self):
         # icnum = self.request.GET.get(u'icnum', '')
@@ -93,7 +136,8 @@ class bahagian_list_json(BaseDatatableView):
                 i+1,
                 qs[i].NamaBahagian,
                 qs[i].BUOrgChart,
-                # reverse_lazy('urusetia_home'),
+                reverse_lazy('bahagian_edit',kwargs={'pk':qs[i].pk}),
+                reverse_lazy('bahagian_remove',kwargs={'pk':qs[i].pk}),
                 # reverse_lazy('urusetia_home'),
                 # str(qs[i].pk),
                 

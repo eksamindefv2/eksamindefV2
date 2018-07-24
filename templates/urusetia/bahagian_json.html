@@ -14,13 +14,14 @@
           <th>{% trans "Bil." %}</th>
           <th>{% trans "Bahagian" %}</th>
           <th>{% trans "BUOrgChart" %}</th>
+          <th>{% trans "Tindakan" %}</th>
         </tr>
      </thead>
   </table>
   </div>
 
   <p class="text-center">
-    <a href="{% url 'urusetia_home' %}" class="btn btn-primary" >Add New Student</a>
+    <a href="{% url 'bahagian_new' %}" class="btn btn-primary" >Tambah Bahagian</a>
   </p>
 
 {% endblock %}
@@ -51,6 +52,13 @@
         "processing": true,
         "serverSide": true,
         "ajax": '{% url "bahagian_list_json" %}',
+        "columnDefs": [ {
+          "targets": 3,
+          "render": function ( data, type, full, meta ) {
+            return '<a href=' + full[3] +'>'+'Edit'+'</a> | <a href=' + full[4] +'>'+'Delete'+'</a>';
+            
+          }
+        } ],
       } );
     } );
     </script>

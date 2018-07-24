@@ -22,4 +22,7 @@ urlpatterns = [
     # path('', include('urusetia.urls')),
     path('urusetia/', include('urusetia.urls')),
 
+
+    
+
 ]
