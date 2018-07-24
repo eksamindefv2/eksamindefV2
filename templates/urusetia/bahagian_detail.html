@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- <div class="container"> -->
+      <div class="page-header">
+        <h1>Maklumat Bahagian</h1>
+      </div>
+
+      <ol class="breadcrumb my-4">
+        <li class="breadcrumb-item active">Boards</li>
+      </ol>
+
+      <table class="table">
+        <thead class="thead-inverse">
+          <tr>
+            <th>BUOrgChart</th>
+            <th>Nama Bahagian</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+              <td>
+                {{ bahagian.BUOrgChart }}
+              </td>
+              <td class="align-middle">{{ bahagian.NamaBahagian }}</td>
+            </tr>
+        </tbody>
+	  </table>
+<p class="text-center">
+      <a href="{% url 'bahagian_edit' bahagian.pk %}" class="btn btn-primary" >Kemaskini Bahagian</a>
+      <a href="{% url 'bahagian_remove' bahagian.pk %}" class="btn btn-primary" >Hapus Bahagian</a>
+    </p>
+
+<!-- </div> -->
+{% endblock %}

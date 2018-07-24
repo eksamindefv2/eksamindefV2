@@ -14,4 +14,5 @@ urlpatterns = [
     # url(r'^(?P<pk>\d+)/edit$', views.bahagian_edit, name='bahagian_edit'),
     url(r'^bahagian/(?P<pk>\d+)/edit$', views.bahagian_edit, name='bahagian_edit'),
     url(r'^bahagian/(?P<pk>\d+)/remove$', views.bahagian_remove, name='bahagian_remove'),
+    url(r'^bahagian/(?P<pk>\d+)/$', views.bahagian_detail, name='bahagian_detail'),
 ]

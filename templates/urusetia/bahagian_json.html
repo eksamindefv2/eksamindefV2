@@ -60,7 +60,15 @@
             return '<a href=' + full[3] +'>'+'Edit'+'</a> | <a href=' + full[4] +'>'+'Delete'+'</a>';
             }
 
-        } ],
+        },
+        {
+          "targets": 1,
+          "render": function ( data, type, full, meta ) {
+             return '<a href=' + full[5] +'>'+data+'</a>';
+            }
+        }
+
+         ],
       } );
     } );
     </script>

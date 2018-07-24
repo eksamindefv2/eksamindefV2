@@ -72,6 +72,10 @@ def bahagian_remove(request,pk):
     messages.success(request, "Bahagian : " + str(namaBahagian) + " telah dihapus! ")
     return redirect(reverse_lazy('bahagian_home_json'))
 
+# Bahagian Detail
+def bahagian_detail(request,pk):
+    bahagian = get_object_or_404(Bahagian, pk=pk)
+    return render(request, 'urusetia/bahagian_detail.html', {'bahagian': bahagian})    
 
 
 # Student JSON list filtering
@@ -138,8 +142,9 @@ class bahagian_list_json(BaseDatatableView):
                 qs[i].BUOrgChart,
                 reverse_lazy('bahagian_edit',kwargs={'pk':qs[i].pk}),
                 reverse_lazy('bahagian_remove',kwargs={'pk':qs[i].pk}),
+                reverse_lazy('bahagian_detail',kwargs={'pk':qs[i].pk}),
                 # reverse_lazy('urusetia_home'),
-                # str(qs[i].pk),
+                str(qs[i].pk),
                 
             ])
             # print(json_data)
