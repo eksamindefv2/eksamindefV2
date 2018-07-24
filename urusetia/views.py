@@ -21,14 +21,20 @@ def index(request):
 def user(request):
 	return render(request,'user.html')
 
-
-
 def home_json(request):
     return render(request, 'student/home_json.html')
 
+def home_bahagian(request):
+    return render(request, 'urusetia/bahagian_json.html')
+
+
+
+
+
 # Student JSON list filtering
 class bahagian_list_json(BaseDatatableView):
-    order_columns = ['bil','namaBahagian','editLink', 'deletelink','pk']
+    # order_columns = ['bil','namaBahagian','editLink', 'deletelink','pk']
+    order_columns = ['id','NamaBahagian','BUOrgChart','Tindakan']
 
     def get_initial_queryset(self):
         # icnum = self.request.GET.get(u'icnum', '')
@@ -45,8 +51,8 @@ class bahagian_list_json(BaseDatatableView):
         # Choose which column to sort
         if iSortCol_0 == '1':
           sortcol = 'NamaBahagian'
-        # elif iSortCol_0 == '2':
-        #   sortcol = 'course'
+        elif iSortCol_0 == '2':
+           sortcol = 'BUOrgChart'
         else:
            sortcol = 'NamaBahagian'
 
@@ -63,7 +69,7 @@ class bahagian_list_json(BaseDatatableView):
           qs_params = None
 
           # Filtering other fields
-          q = Q(BUOrgChart__icontains=search)
+          q = Q(BUOrgChart__icontains=search)|Q(NamaBahagian__icontains=search)
           qs_params = qs_params | q if qs_params else q
    
           # Completed Q queryset
@@ -87,14 +93,13 @@ class bahagian_list_json(BaseDatatableView):
                 i+1,
                 qs[i].NamaBahagian,
                 qs[i].BUOrgChart,
-                reverse_lazy('urusetia_home'),
                 # reverse_lazy('urusetia_home'),
-                str(qs[i].pk),
+                # reverse_lazy('urusetia_home'),
+                # str(qs[i].pk),
                 
             ])
             # print(json_data)
         return json_data
 
 
-def home_json(request):
-    return render(request, 'urusetia/bahagian_json.html')	
+	

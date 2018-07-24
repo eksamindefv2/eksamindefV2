@@ -4,15 +4,14 @@
 
 
 {% block content %}
-  
+  <legend>Student Registration System</legend>
   <div class="table-responsive">
-  <table id="example" class="table table-striped">
+  <table id="example" class="stripe">
   <!-- <table id="example" class="display select table table-responsive" cellspacing="0" width="100%"> -->
      <thead>
         <tr>
-<!--           <th>{% trans "IC Number" %}</th> -->
           <th>{% trans "Bil." %}</th>
-          <th>{% trans "Bahagian" %}</th>
+          <th>{% trans "Nama Bahagian" %}</th>
           <th>{% trans "BUOrgChart" %}</th>
         </tr>
      </thead>
@@ -51,6 +50,13 @@
         "processing": true,
         "serverSide": true,
         "ajax": '{% url "bahagian_list_json" %}',
+        "columnDefs": [ {
+          "targets": 0,
+          "render": function ( data, type, full, meta ) {
+            return '<a href='+ "{% url 'urusetia_home' %}"+'</a>';
+            
+          }
+        } ]
       } );
     } );
     </script>
