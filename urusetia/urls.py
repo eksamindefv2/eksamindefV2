@@ -8,6 +8,11 @@ urlpatterns = [
     url(r'^user',views.user,name='user'),
 
     url(r'^list_json/$',views.bahagian_list_json.as_view(), name="bahagian_list_json"),
+    url(r'^list_zon_json/$',views.zon_list_json.as_view(), name="zon_list_json"),
+
+    url(r'^zon/$',views.zon,name='zon'),
+
+
     url(r'^bahagian/$',views.home_bahagian,name='bahagian_home_json'),
     url(r'^bahagian/new/$', views.bahagian_new, name='bahagian_new'),
     # url(r'^bahagian/edit/$', views.bahagian_edit, name='bahagian_edit'),
