@@ -39,6 +39,7 @@
 <body>
 
 <div class="wrapper">
+  {% block sidebar %}
   <div class="sidebar" data-background-color="white" data-active-color="danger">
 
     <!--
@@ -100,8 +101,9 @@
             </ul>
       </div>
     </div>
-
+    {% endblock %}
     <div class="main-panel">
+    {% block navbar %}
     <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -173,6 +175,8 @@
           {% endif %}
 
         {% endblock %}
+
+      {% endblock %}
         <div class="content">
             <div class="container-fluid">
                 <div class="row">

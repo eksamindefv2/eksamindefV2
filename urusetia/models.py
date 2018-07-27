@@ -16,8 +16,9 @@ class Bahagian(models.Model):
 class Zon(models.Model):
 
 	# IDZon = models.IntegerField('IDZon',unique = True,blank=False,null=False)
-	NamaZon = models.CharField('NamaZon',max_length=12,blank=False,null=False)
-	BUOrgChart = models.ForeignKey(Bahagian,on_delete=models.CASCADE)
+	NamaZon = models.CharField('NamaZon',max_length=30,blank=False,null=False)
+	# BUOrgChart = models.ForeignKey(Bahagian,on_delete=models.CASCADE)
+	Bahagian = models.ForeignKey(Bahagian,on_delete=models.CASCADE)
 
 	def __str__(self):
 		return str (self.pk)

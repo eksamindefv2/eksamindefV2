@@ -4,13 +4,19 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib import messages
 # from django.utils import timezone
-from .forms import BahagianForm
+from .forms import BahagianForm,ZonForm
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.db.models import Count, Sum, Q, Case, Value, When, IntegerField
 
 # Create your views here.
+
+def dummy_view(request):
+
+	z = Zon.objects.filter(BUOrgChart=2)
+	print(z)
+	return render(request,'urusetia/dummy.html',{'z': z})
 
 def home(request):
 	return render(request,'base.html')
@@ -49,6 +55,23 @@ def bahagian_new(request):
     return render(request, 'urusetia/bahagian_new.html', {'form': form})
 
 
+# Tambah Zon
+def zon_new(request):
+
+    # zon = get_object_or_404(Zon)
+    if request.method == "POST":
+        form = ZonForm(request.POST)
+        if form.is_valid():
+            zon = form.save(commit=False)
+            zon.BUOrgChart_id = pk
+            zon.save()
+            messages.success(request, "Zon " + str(zon.NamaZon) + " telah dicipta ! ")
+            return redirect(reverse_lazy('zon_new'))
+    else:
+        form = ZonForm()
+    print(request.user)
+    return render(request, 'urusetia/zon_new.html', {'form': form})
+
 # Kemaskini Bahagian
 def bahagian_edit(request,pk):
 
@@ -67,6 +90,25 @@ def bahagian_edit(request,pk):
     return render(request, 'urusetia/bahagian_edit.html', {'form': form})
 
 
+# Kemaskini Bahagian
+def zon_edit(request,pk):
+
+    # bahagian = get_object_or_404(Bahagian, pk=pk)
+    zon = get_object_or_404(Zon, pk=pk)
+    if request.method == "POST":
+        form = ZonForm(request.POST,instance=zon)
+        if form.is_valid():
+            zon = form.save(commit=False)
+            zon.save()
+            # return redirect('post_detail', pk=post.pk)
+            messages.success(request, "Zon " + str(zon.NamaZon) + " telah dikemaskini! ")
+            return redirect(reverse_lazy('zon_edit',kwargs={'pk':pk}))
+    else:
+        form = ZonForm(instance=zon)
+    
+    return render(request, 'urusetia/zon_edit.html', {'form': form}) 
+
+
 # Delete Bahagian
 def bahagian_remove(request,pk):
 
@@ -81,6 +123,17 @@ def bahagian_remove(request,pk):
 def bahagian_detail(request,pk):
     bahagian = get_object_or_404(Bahagian, pk=pk)
     return render(request, 'urusetia/bahagian_detail.html', {'bahagian': bahagian})    
+
+
+# Delete Zon
+def zon_remove(request,pk):
+
+    zon = get_object_or_404(Zon, pk=pk)
+    # if request.method == "POST":
+    namaZon = zon.NamaZon
+    zon.delete()
+    messages.success(request, "Zon : " + str(namaZon) + " telah dihapus! ")
+    return redirect(reverse_lazy('bahagian_home_json'))       
 
 
 # Bahagian JSON list filtering
@@ -121,7 +174,7 @@ class bahagian_list_json(BaseDatatableView):
           qs_params = None
 
           # Filtering other fields
-          q = Q(BUOrgChart__icontains=search)|Q(NamaBahagian__icontains=search)
+          q = Q(Bahagian_id__icontains=search)|Q(NamaBahagian__icontains=search)
           qs_params = qs_params | q if qs_params else q
    
           # Completed Q queryset
@@ -162,10 +215,10 @@ class zon_list_json(BaseDatatableView):
     order_columns = ['id','NamaZon','editLink']
 
     def get_initial_queryset(self):
-        BUOrgChart_id = self.request.GET.get(u'BUOrgChart_id', 0)
+        Bahagian_id = self.request.GET.get(u'Bahagian_id', 0)
         # return Student.objects.filter(icnum=icnum)
         # return Zon.objects.all().order_by('NamaZon')
-        return Zon.objects.filter(BUOrgChart_id=BUOrgChart_id).order_by('NamaZon')
+        return Zon.objects.filter(Bahagian_id=Bahagian_id).order_by('NamaZon')
 
     def filter_queryset(self, qs):
 
@@ -219,8 +272,8 @@ class zon_list_json(BaseDatatableView):
                 i+1,
                 qs[i].NamaZon,
                 # qs[i].BUOrgChart,
-                # reverse_lazy('bahagian_edit',kwargs={'pk':qs[i].pk}),
-                # reverse_lazy('bahagian_remove',kwargs={'pk':qs[i].pk}),
+                reverse_lazy('zon_edit',kwargs={'pk':qs[i].pk}),
+                reverse_lazy('zon_remove',kwargs={'pk':qs[i].pk}),
                 # reverse_lazy('bahagian_detail',kwargs={'pk':qs[i].pk}),
                 # reverse_lazy('urusetia_home'),
                 str(qs[i].pk),

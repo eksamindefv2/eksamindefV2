@@ -9,7 +9,7 @@
     <div class="card">
         <div class="header">
             <h4 class="title">Bahagian : {{ bahagian.NamaBahagian }}</h4>
-            <p class="category">Kod Bahagian : {{ bahagian.BUOrgChart }}</p>
+            <p class="category">Kod Bahagian : {{ bahagian.BUOrgChart }}{{ bahagian.pk }}</p>
         </div>
         <div class="content table-responsive">
           <br>
@@ -24,9 +24,9 @@
      </thead>
   </table>
 <p class="text-center">
-      <a href="{% url 'bahagian_edit' bahagian.pk %}" class="btn btn-primary" >Kemaskini Bahagian</a>
-      <a href="{% url 'bahagian_remove' bahagian.pk %}" class="btn btn-primary" >Hapus Bahagian</a>
-    </p>
+    <!-- <a href="{% url 'zon_new' %}" class="btn btn-primary" >Tambah Zon</a> -->
+    <a href="{% url 'zon_new' %}" class="btn btn-primary" >Tambah Zon</a>
+</p>
 
 <!-- </div> -->
 {% endblock %}
@@ -59,7 +59,7 @@
         "serverSide": true,
         'ajax': { url : '{% url "zon_list_json" %}',
                   data: function ( data ) {
-                  data.BUOrgChart_id = "{{ bahagian.pk }}";
+                  data.Bahagian_id = "{{ bahagian.pk }}";
                   },
                 },
         "columnDefs": [ 
@@ -67,14 +67,14 @@
           "targets": 2,
           "orderable": false,
           "render": function ( data, type, full, meta ) {
-            return '<a href=' + full[2] +'>'+'Edit'+'</a> | <a href=' + full[2] +'>'+'Delete'+'</a>';
+            return '<a href=' + full[2] +' title="Kemaskini"><i class="fa fa-pencil text-primary fa-lg"></i></a> | <a href=' + full[3] +' title="Hapus"><i class="fa fa-trash text-danger fa-lg"></a>';
             }
 
         },
         {
           "targets": 1,
           "render": function ( data, type, full, meta ) {
-             return '<a href=' + full[1] +'>'+data+'</a>';
+             return data;
             }
         }
 
