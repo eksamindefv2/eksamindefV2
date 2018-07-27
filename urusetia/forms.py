@@ -44,4 +44,4 @@ class ZonForm(forms.ModelForm):
 
     class Meta:
         model = Zon
-        fields = ('NamaZon','Bahagian')        
+        fields = ('NamaZon',)        

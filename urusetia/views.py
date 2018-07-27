@@ -56,21 +56,27 @@ def bahagian_new(request):
 
 
 # Tambah Zon
-def zon_new(request):
+def zon_new(request,pk):
 
     # zon = get_object_or_404(Zon)
+    # Bahagian_id=self.kwargs['pk']
+    # print(pk)
+    # Bahagian_id=pk
     if request.method == "POST":
         form = ZonForm(request.POST)
         if form.is_valid():
             zon = form.save(commit=False)
-            zon.BUOrgChart_id = pk
+            zon.Bahagian_id = int(pk)
             zon.save()
             messages.success(request, "Zon " + str(zon.NamaZon) + " telah dicipta ! ")
-            return redirect(reverse_lazy('zon_new'))
+            # return redirect(reverse_lazy('zon_new'))
+            return redirect(reverse_lazy('bahagian_detail',kwargs={'pk':pk}))
     else:
         form = ZonForm()
-    print(request.user)
-    return render(request, 'urusetia/zon_new.html', {'form': form})
+    # print(request.user)
+        bahagian = get_object_or_404(Bahagian, pk=pk)
+        print(bahagian)
+    return render(request, 'urusetia/zon_new.html', {'form': form, 'bahagian': bahagian} )
 
 # Kemaskini Bahagian
 def bahagian_edit(request,pk):

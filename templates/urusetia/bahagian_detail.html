@@ -9,7 +9,7 @@
     <div class="card">
         <div class="header">
             <h4 class="title">Bahagian : {{ bahagian.NamaBahagian }}</h4>
-            <p class="category">Kod Bahagian : {{ bahagian.BUOrgChart }}{{ bahagian.pk }}</p>
+            <p class="category">Kod Bahagian : {{ bahagian.BUOrgChart }}</p>
         </div>
         <div class="content table-responsive">
           <br>
@@ -24,9 +24,11 @@
      </thead>
   </table>
 <p class="text-center">
-    <!-- <a href="{% url 'zon_new' %}" class="btn btn-primary" >Tambah Zon</a> -->
-    <a href="{% url 'zon_new' %}" class="btn btn-primary" >Tambah Zon</a>
+    <a href="{% url 'zon_new_url' bahagian.pk %}" class="btn btn-primary" >Tambah Zon</a>
 </p>
+
+
+
 
 <!-- </div> -->
 {% endblock %}
