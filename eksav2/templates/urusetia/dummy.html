@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+  {{ z }}
+  {% for i in z %}
+    <p>{{ i }} {{ i.NamaZon }}</p>
+  {% endfor %}
+  
+{% endblock %}

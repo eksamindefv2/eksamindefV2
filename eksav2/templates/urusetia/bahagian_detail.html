@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<!-- <div class="container"> -->
+
+      <div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Bahagian : {{ bahagian.NamaBahagian }}</h4>
+            <p class="category">Kod Bahagian : {{ bahagian.BUOrgChart }}</p>
+        </div>
+        <div class="content table-responsive">
+          <br>
+     <table id="example" class="table table-striped">
+  <!-- <table id="example" class="display select table table-responsive" cellspacing="0" width="100%"> -->
+     <thead>
+        <tr>
+          <th>{% trans "Bil." %}</th>
+          <th>{% trans "Nama Zon" %}</th>
+          <th>{% trans "Tindakan" %}</th>
+        </tr>
+     </thead>
+  </table>
+<p class="text-center">
+    <a href="{% url 'zon_new_url' bahagian.pk %}" class="btn btn-primary" >Tambah Zon</a>
+</p>
+
+
+
+
+<!-- </div> -->
+{% endblock %}
+
+
+
+{% block head_datatables_js %}    
+  <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>  
+{% endblock %}
+
+{% block head_datatables_css %} 
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+  <style>
+    table.dataTable.select tbody tr,
+    table.dataTable thead th:first-child {
+      cursor: pointer;
+    }
+  </style>
+{% endblock %}
+
+{% block jquery %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+{% endblock %}
+
+{% block head_datatables_script %} 
+   <script type="text/javascript">
+    $(document).ready(function() {
+      $('#example').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        'ajax': { url : '{% url "zon_list_json" %}',
+                  data: function ( data ) {
+                  data.Bahagian_id = "{{ bahagian.pk }}";
+                  },
+                },
+        "columnDefs": [ 
+        {
+          "targets": 2,
+          "orderable": false,
+          "render": function ( data, type, full, meta ) {
+            return '<a href=' + full[2] +' title="Kemaskini"><i class="fa fa-pencil text-primary fa-lg"></i></a> | <a href=' + full[3] +' title="Hapus"><i class="fa fa-trash text-danger fa-lg"></a>';
+            }
+
+        },
+        {
+          "targets": 1,
+          "render": function ( data, type, full, meta ) {
+             return data;
+            }
+        }
+
+         ],
+      } );
+    } );
+    </script>
+{% endblock %}

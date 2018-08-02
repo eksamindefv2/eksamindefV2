@@ -1,0 +1,519 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>EKSAv2.0</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static 'css/paper-dashboard.css' %}" rel="stylesheet"/>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static 'css/demo.css' %}" rel="stylesheet" />
+
+
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/themify-icons.css' %}" rel="stylesheet">
+
+
+    <link href="{% static 'css/coming-soon.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendor.css' %}" rel="stylesheet">
+    <link href="{% static 'css/app.css' %}" rel="stylesheet">
+    <link href="{% static 'css/timeline.css' %}" rel="stylesheet">
+
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+    <!--
+		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+		Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+	-->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    EKSA2.0 MINDEF
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="ti-panel"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="user.html">
+                        <i class="ti-view-list-alt"></i>
+                        <p>Selenggara Bahagian</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="ti-text"></i>
+                        <p>Selenggara Sesi Audit</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="ti-pencil-alt2"></i>
+                        <p>Selenggara Jadual</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="ti-map"></i>
+                        <p>Selenggara Komponen</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="ti-bell"></i>
+                        <p>Laporan Markah Zon</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="ti-bell"></i>
+                        <p>Laporan Markah Bhgian</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Dashboard</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="ti-panel"></i>
+								<p>Stats</p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="ti-bell"></i>
+                                    <p class="notification">5</p>
+									<p>Notifications</p>
+									<b class="caret"></b>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#">Notification 1</a></li>
+                                <li><a href="#">Notification 2</a></li>
+                                <li><a href="#">Notification 3</a></li>
+                                <li><a href="#">Notification 4</a></li>
+                                <li><a href="#">Another notification</a></li>
+                              </ul>
+                        </li>
+						<li>
+                            <a href="#">
+								<i class="ti-settings"></i>
+								<p>Settings</p>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+
+        <div class="content">
+            <div class="container-fluid">
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        
+
+                    <img src="{% static 'img/banner.png' %}" style="width: 100%;height:280px">            
+
+
+
+
+
+                    </div>
+                </div><br>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                                <div class="card">
+          <div class="header">
+                                <h4 class="title">Garis Masa EKSA</h4>
+                                <p class="category">Tempoh Sepanjang Tahun</p>
+                            </div>
+          <div class="card-content">
+            <div class="card-body">
+              <div class="card-text">
+                <p></p>
+                <section class="cd-horizontal-timeline">
+                  <div class="timeline">
+                    <div class="events-wrapper">
+                      <div class="events">
+                        <ol>
+                          <li><a href="#0" data-date="06/03/2018" class="selected">06 Mac</a></li>
+                          <li><a href="#0" data-date="30/03/2018">30 Mac </a></li>
+                          <li><a href="#0" data-date="15/04/2018">15 April </a></li>
+                          <li><a href="#0" data-date="09/07/2018">09 Jul</a></li>
+                          <li><a href="#0" data-date="30/07/2018">30 Jul</a></li>
+                          <li><a href="#0" data-date="06/10/2018">06 Okt</a></li>
+                          <li><a href="#0" data-date="30/10/2018">30 Okt</a></li>
+                         <!-- <li><a href="#0" data-date="15/09/2015">15 Sep</a></li>
+                          <li><a href="#0" data-date="01/11/2015">01 Nov</a></li>
+                          <li><a href="#0" data-date="10/12/2015">10 Dec</a></li>
+                          <li><a href="#0" data-date="19/01/2016">29 Jan</a></li>
+                          <li><a href="#0" data-date="03/03/2016">3 Mar</a></li> -->
+                            
+                        </ol>
+                        <span class="filling-line" aria-hidden="true"></span>
+                      </div>
+                      <!-- .events -->
+                    </div>
+                    <!-- .events-wrapper -->
+                    <ul class="cd-timeline-navigation">
+                      <li><a href="#0" class="prev inactive">Prev</a></li>
+                      <li><a href="#0" class="next">Next</a></li>
+                    </ul>
+                    <!-- .cd-timeline-navigation -->
+                  </div>
+                  <!-- .timeline -->
+                  <div class="events-content">
+                    <ol>
+                      <li class="selected" data-date="06/03/2018">
+                        <h4 align="center"><b>Auditor Memulakan Lawatan</b></h4>
+                        <br>
+                        <h4 class="text-muted mb-1" Audit Eksa Bil 1/2018>
+                          <em>06 Mac, 2018</em>
+                        </h4>
+                        <p class="lead">
+                           Audit Eksa MinDef Bilangan 1 Tahun 2018 diadakan mulai 06 Mac hingga 09 Mac 2018
+                           di seluruh Kementerian Pertahanan Malaysia. 
+                        </p>
+                      </li>
+                      <li data-date="30/03/2018">
+                        <h4 align="center"><b>Tarikh Akhir Penghantaran Laporan Audit</b></h4>
+                        <h3 class="text-muted mb-1">
+                          <em>30 Mac, 2018</em>
+                        </h3>
+                        <p class="lead">
+                           Tarikh akhir penghantaran Laporan Audit Eksa MinDef Bilangan 1 Tahun 2018  kepada Ketua Juru Audit 
+                        </p>
+                      </li>
+                      <li data-date="15/04/2018">
+                        <h4 align="center"><b>Keputusan Audit Eksa Bil 1/2018</b></h4>
+                        <h3 class="text-muted mb-1">
+                          <em>15 April, 2018</em>
+                        </h3>
+                        <p class="lead">
+                          Pembentangan Laporan Audit Eksa MinDef Bilangan 1 Tahun 2018 kepada pengurusan tertinggi Kementerian
+                        </p>
+                      </li>
+                      <li data-date="20/05/2015">
+                        <h2>Event title here</h2>
+                        <h3 class="text-muted mb-1">
+                          <em>May 20th, 2015</em>
+                        </h3>
+                        
+                      </li>
+                      <li data-date="09/07/2015">
+                        <h2>Event title here</h2>
+                        <h3 class="text-muted mb-1">
+                          <em>July 9th, 2015</em>
+                        </h3>
+                        
+                      </li>
+                      <li data-date="30/08/2015">
+                        <h2>Event title here</h2>
+                        <h3 class="text-muted mb-1">
+                          <em>August 30th, 2015</em>
+                        </h3>
+                        <p class="lead">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia,
+                          fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur
+                          aspernatur at, eaque hic repellendus sit dicta consequatur
+                          quae, ut harum ipsam molestias maxime non nisi reiciendis
+                          eligendi! Doloremque quia pariatur harum ea amet quibusdam
+                          quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                      </li>
+                      <li data-date="15/09/2015">
+                        <h2>Event title here</h2>
+                        <h3 class="text-muted mb-1">
+                          <em>September 15th, 2015</em>
+                        </h3>
+                        <p class="lead">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia,
+                          fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur
+                          aspernatur at, eaque hic repellendus sit dicta consequatur
+                          quae, ut harum ipsam molestias maxime non nisi reiciendis
+                          eligendi! Doloremque quia pariatur harum ea amet quibusdam
+                          quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                      </li>
+                      <li data-date="01/11/2015">
+                        <h2>Event title here</h2>
+                        <h3 class="text-muted mb-1">
+                          <em>November 1st, 2015</em>
+                        </h3>
+                        <p class="lead">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia,
+                          fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur
+                          aspernatur at, eaque hic repellendus sit dicta consequatur
+                          quae, ut harum ipsam molestias maxime non nisi reiciendis
+                          eligendi! Doloremque quia pariatur harum ea amet quibusdam
+                          quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                      </li>
+                      <li data-date="10/12/2015">
+                        <h2>Event title here</h2>
+                        <h3 class="text-muted mb-1">
+                          <em>December 10th, 2015</em>
+                        </h3>
+                        <p class="lead">
+                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum praesentium officia,
+                          fugit recusandae ipsa, quia velit nulla adipisci? Consequuntur
+                          aspernatur at, eaque hic repellendus sit dicta consequatur
+                          quae, ut harum ipsam molestias maxime non nisi reiciendis
+                          eligendi! Doloremque quia pariatur harum ea amet quibusdam
+                          quisquam, quae, temporibus dolores porro doloribus.
+                        </p>
+                      </li>
+                      <li data-date="19/01/2016">
+                        <h2>Event title here</h2>
+                        <h3 class="text-muted mb-1">
+                          <em>January 19th, 2016</em>
+                        </h3>
+                        
+                      </li>
+                      <li data-date="03/03/2016">
+                        <h2>Event title here</h2>
+                        <h3 class="text-muted mb-1">
+                          <em>March 3rd, 2016</em>
+                        </h3>
+                        
+                      </li>
+                    </ol>
+                  </div>
+                  <!-- .events-content -->
+                </section>
+              </div>
+            </div>
+          </div><br><br>
+        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-warning text-center">
+                                            <i class="ti-server"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Sesi Audit Semasa</p>
+                                            Bil. 2/2018
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-reload"></i> Updated now
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-success text-center">
+                                            <i class="ti-wallet"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Jumlah Bahagian</p>
+                                            29
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-calendar"></i> Last day
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-danger text-center">
+                                            <i class="ti-pulse"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Jumlah Zon</p>
+                                            93
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-timer"></i> In the last hour
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <div class="icon-big icon-info text-center">
+                                            <i class="ti-medall-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-7">
+                                        <div class="numbers">
+                                            <p>Juruaudit Terbaik</p>
+                                            Goh Chee 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        <i class="ti-reload"></i> Updated now
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+
+                <div class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script> Bahagian Pengurusan Maklumat, MINDEF</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{% static 'js/jquery-1.10.2.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="{% static 'js/bootstrap-checkbox-radio.js' %}"></script>
+
+	<!--  Charts Plugin -->
+	<script src="{% static 'js/chartist.min.js' %}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static 'js/bootstrap-notify.js' %}"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+	<script src="{% static 'js/paper-dashboard.js' %}"></script>
+
+	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+	<script src="{% static 'js/demo.js' %}"></script>
+
+	<script type="text/javascript">
+    	$(document).ready(function(){
+
+        	demo.initChartist();
+
+        	$.notify({
+            	icon: 'ti-gift',
+            	message: "Selamat Datang ke Sistem <b>EKSA2.0</b>"
+
+            },{
+                type: 'success',
+                timer: 4000
+            });
+
+    	});
+	</script>
+
+    <script src="{% static 'js/vendor.min.js' %}"></script>
+    <script src="{% static 'js/horizontal-timeline.js' %}"></script>
+    <script src="{% static 'js/coming-soon.js' %}"></script>
+    <script src="{% static 'js/coming-soon.min.js' %}"></script>
+    <script src="{% static 'js/jquery.countdown.js' %}"></script>
+    <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+
+</html>
