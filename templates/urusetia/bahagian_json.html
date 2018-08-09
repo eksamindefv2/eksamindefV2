@@ -62,9 +62,10 @@
         "columnDefs": [ 
         {
           "targets": 3,
+          "className": "text-center",
           "orderable": false,
           "render": function ( data, type, full, meta ) {
-            return '<a href=' + full[3] +'>'+'Edit'+'</a> | <a href=' + full[4] +'>'+'Delete'+'</a>';
+            return '<a href=' + full[3] +' title="Kemaskini"><i class="fa fa-pencil text-primary fa-lg"></i></a> | <a href=' + full[4] +' title="Hapus"><i class="fa fa-trash text-danger fa-lg"></a>';
             }
 
         },

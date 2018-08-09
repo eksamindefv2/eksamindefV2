@@ -108,7 +108,7 @@ def zon_edit(request,pk):
             zon.save()
             # return redirect('post_detail', pk=post.pk)
             messages.success(request, "Zon " + str(zon.NamaZon) + " telah dikemaskini! ")
-            return redirect(reverse_lazy('zon_edit',kwargs={'pk':pk}))
+            return redirect(reverse_lazy('bahagian_detail',kwargs={'pk':pk}))
     else:
         form = ZonForm(instance=zon)
     

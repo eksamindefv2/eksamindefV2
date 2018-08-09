@@ -3,13 +3,12 @@ import pyodbc
 # server = 'localhost\sqlexpress' # for a named instance
 # server = 'myserver,port' # to specify an alternate port
 server = '10.101.1.246' 
-database = 'EDKICT' 
-username = '' 
-password = '' 
+database = 'DBEksa' 
+username = 'sa' 
+password = 'seeDB@2017' 
 cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
-cursor = cnxn.cursor()
-
-cursor.execute("SELECT * from dbo.pengguna;")
-for row in cursor:
-    print(row)
- 
+cursor = execute("SELECT @@version;")
+row = cursor.fetchone()
+while row:
+	print row[0]
+	row = cursor.fetchone()

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+  <div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Senarai Komponen</h4>
+            <p class="category">Jadual memaparkan senarai komponen yang terlibat dengan EKSA</p>
+        </div>
+        <div class="content table-responsive">
+          <br>
+  <div class="table-responsive">
+  <table id="example" class="table table-striped">
+  <!-- <table id="example" class="display select table table-responsive" cellspacing="0" width="100%"> -->
+     <thead>
+        <tr>
+<!--           <th>{% trans "IC Number" %}</th> -->
+          <th>{% trans "Bil." %}</th>
+          <th>{% trans "Komponen" %}</th>
+          <th>{% trans "Kod Komponen" %}</th>
+          <th>{% trans "Status" %}</th>
+          <th>{% trans "Tindakan" %}</th>
+        </tr>
+     </thead>
+  </table>
+  </div>
+
+  <p class="text-center">
+    <a href="{% url 'komponen_new' %}" class="btn btn-primary" >Tambah Komponen</a>
+  </p>
+
+{% endblock %}
+
+
+{% block head_datatables_js %}    
+  <script src="http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>  
+{% endblock %}
+
+{% block head_datatables_css %} 
+  <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+  <style>
+    table.dataTable.select tbody tr,
+    table.dataTable thead th:first-child {
+      cursor: pointer;
+    }
+  </style>
+{% endblock %}
+
+{% block jquery %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+{% endblock %}
+
+{% block head_datatables_script %} 
+   <script type="text/javascript">
+    $(document).ready(function() {
+      $('#example').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": '{% url "komponen_list_json" %}',
+        "columnDefs": [ 
+        {
+          "targets": 4,
+          "className": "text-center",
+          "orderable": false,
+          "render": function ( data, type, full, meta ) {
+            return '<a href=' + full[4] +' title="Kemaskini"><i class="fa fa-pencil text-primary fa-lg"></i></a> | <a href=' + full[5] +' title="Hapus"><i class="fa fa-trash text-danger fa-lg"></a>';
+            }
+
+        },
+        {
+          "targets": 1,
+          "render": function ( data, type, full, meta ) {
+             return '<a href=' + full[0] +'>'+data+'</a>';
+            }
+        },
+        {
+          "targets": 3,
+          "className": "text-center",
+          "render": function ( data, type, full, meta ) {
+            if(data==1)
+              return '<span class="label label-primary">Aktif</span>';
+            else
+              return '<span class="label label-danger">Tidak Aktif</span>';
+             return status;
+            }
+        }
+
+         ],
+      } );
+    } );
+    </script>
+{% endblock %}
