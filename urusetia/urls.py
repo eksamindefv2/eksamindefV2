@@ -1,11 +1,19 @@
 from django.conf.urls import include,url
 from . import views
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    url(r'^$',views.home,name='urusetia_home'),
+    url(r'^$',login_required(views.home),name='urusetia_home'),
+
     url(r'^index',views.index,name='index'),
     url(r'^dashboard',views.index,name='index'),
     url(r'^user',views.user,name='user'),
+
+
+    # url(r'^login',views.login,name='login'),
+
+
+
 
     url(r'^list_json/$',views.bahagian_list_json.as_view(), name="bahagian_list_json"),
     url(r'^list_zon_json/$',views.zon_list_json.as_view(), name="zon_list_json"),

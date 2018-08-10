@@ -88,6 +88,12 @@ class komponen_list_json(BaseDatatableView):
 def home_komponen(request):
     return render(request, 'persediaan/komponen_json.html')
 
+# Test views 
+def jawapan_test(request):
+    komponen = Komponen.objects.all()
+    print(komponen)
+    return render(request, 'persediaan/test.html',{'komponen': komponen})
+
 # Tambah Komponen
 def komponen_new(request):
 

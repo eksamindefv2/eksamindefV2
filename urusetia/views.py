@@ -24,6 +24,10 @@ def home(request):
 def index(request):
 	return render(request,'dashboard.html')
 
+# Login Form
+def login(request):
+    return render(request,'login.html')
+
 def user(request):
 	return render(request,'user.html')
 

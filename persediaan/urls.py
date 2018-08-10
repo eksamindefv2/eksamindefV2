@@ -7,6 +7,8 @@ urlpatterns = [
     url(r'^list_json/$',views.komponen_list_json.as_view(), name="komponen_list_json"),
     url(r'^komponen/$',views.home_komponen,name='komponen_home_json'),
     url(r'^komponen/new/$', views.komponen_new, name='komponen_new'),
+    
+    url(r'^jawapan/test/$', views.jawapan_test, name='testlink'),
 
     # Hapus Komponen
     url(r'^komponen/(?P<pk>\d+)/remove$', views.komponen_remove, name='komponen_remove'),
