@@ -7,7 +7,7 @@ urlpatterns = [
 
     url(r'^$',login_required(views.home),name='urusetia_home'),
 
-    url(r'^index',views.index,name='index'),
+    # url(r'^index',views.index,name='index'),
     url(r'^dashboard',views.index,name='index'),
     url(r'^user',views.user,name='user'),
 

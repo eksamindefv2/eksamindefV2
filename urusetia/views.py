@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Bahagian,Zon
 from django.shortcuts import render, redirect, get_object_or_404
@@ -7,6 +8,7 @@ from django.contrib import messages
 from .forms import BahagianForm,ZonForm
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import (login as auth_login,  authenticate)
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.db.models import Count, Sum, Q, Case, Value, When, IntegerField
 
@@ -21,12 +23,30 @@ def dummy_view(request):
 def home(request):
 	return render(request,'base.html')
 
+@login_required(login_url='login')
 def index(request):
 	return render(request,'dashboard.html')
 
 # Login Form
 def login(request):
-    return render(request,'registration/login_new.html')
+    _message = 'Sila Log Masuk'
+    _alert = 'warning'
+    if request.method == 'POST':
+        _username = request.POST['username']
+        _password = request.POST['password']
+        user = authenticate(username=_username, password=_password)
+        if user is not None:
+            if user.is_active:
+                auth_login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                _message = 'Akaun Anda Tidak Aktif'
+                _alert = 'danger'
+        else:
+            _message = 'Kata Laluan Salah.'
+            _alert = 'danger'
+    context = {'message': _message,'alert':_alert}
+    return render(request, 'registration/login_new.html', context)
 
 def user(request):
 	return render(request,'user.html')
@@ -35,6 +55,7 @@ def home_json(request):
     return render(request, 'student/home_json.html')
 
 # Senarai Bahagian
+@login_required(login_url='login')
 def home_bahagian(request):
     return render(request, 'urusetia/bahagian_json.html')
 

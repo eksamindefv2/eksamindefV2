@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'eksav2.wsgi.application'
 
 
 LOGIN_REDIRECT_URL = 'urusetia_home'
-LOGOUT_REDIRECT_URL = 'urusetia_home'
+LOGOUT_REDIRECT_URL = 'login'
 
 
 
