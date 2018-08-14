@@ -3,6 +3,8 @@ from . import views
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
+
+
     url(r'^$',login_required(views.home),name='urusetia_home'),
 
     url(r'^index',views.index,name='index'),
@@ -10,7 +12,7 @@ urlpatterns = [
     url(r'^user',views.user,name='user'),
 
 
-    # url(r'^login',views.login,name='login'),
+    url(r'^login',views.login,name='login'),
 
 
 

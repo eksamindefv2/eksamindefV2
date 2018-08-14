@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title_navbar %}
+    <a class="navbar-brand" href="{% url 'jawapan_list_json' %}">Selenggara Jawapan</a>
+{% endblock %}
+{% block content %}
+  <div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Tambah Jawapan</h4>
+            <p class="category">Soalan : {{ soalan.NoSoalan }}</p>
+            <p class="category"></p>
+        </div>
+        <div class="content table-responsive">
+          <br>
+  <div class="table-responsive">
+  <table id="example" class="table table-striped">
+  <!-- <table id="example" class="display select table table-responsive" cellspacing="0" width="100%"> -->
+     {% crispy form %}    
+  </table>
+  </div>
+
+
+{% endblock %}
+
+
+
+{% block jquery %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+{% endblock %}

@@ -26,7 +26,7 @@ def index(request):
 
 # Login Form
 def login(request):
-    return render(request,'login.html')
+    return render(request,'registration/login_new.html')
 
 def user(request):
 	return render(request,'user.html')

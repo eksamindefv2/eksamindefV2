@@ -1,10 +1,10 @@
 from django.urls import reverse
-from .models import Komponen,SubKomponen,Soalan
+from .models import Komponen,SubKomponen,Soalan,Jawapan
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib import messages
 # from django.utils import timezone
-from .forms import KomponenForm,SubKomponenForm, SoalanForm
+from .forms import KomponenForm,SubKomponenForm, SoalanForm, JawapanForm
 # from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
@@ -355,6 +355,7 @@ class soalan_list_json(BaseDatatableView):
                 qs[i].Status,
                 reverse_lazy('soalan_edit',kwargs={'pk':qs[i].pk}),
                 reverse_lazy('soalan_remove',kwargs={'pk':qs[i].pk}),
+                reverse_lazy('jawapan',kwargs={'pk':qs[i].pk}),
                 # reverse_lazy('soalan',kwargs={'pk':qs[i].pk}),
                 str(qs[i].pk),
                 
@@ -411,3 +412,137 @@ def soalan_remove(request,pk):
     messages.success(request, "Soalan : " + str(namaSoalan) + " telah dihapus! ")
     return redirect(reverse_lazy('komponen_home_json')) 
 
+# ------------------------------------------------------------------------------------------------------------------------
+
+# Jawan -- Papar Jawapan
+def jawapan(request,pk):
+
+    soalan = get_object_or_404(Soalan, pk=pk)
+    return render(request, 'persediaan/jawapan_list.html', {'soalan': soalan})    
+
+
+
+# jawapan - List JSON
+class jawapan_list_json(BaseDatatableView):
+    # order_columns = ['bil','namaBahagian','editLink', 'deletelink','pk']
+    order_columns = ['id','NoJawapan','DeskripsiJawapan', 'Jawapan','editLink']
+
+    def get_initial_queryset(self):
+        Soalan_id = self.request.GET.get(u'Soalan_id', 0)
+        # return Student.objects.filter(icnum=icnum)
+        # return Zon.objects.all().order_by('NamaZon')
+        # return Soalan.objects.all().order_by('NoSoalan')
+        # return Jawapan.objects.all()
+        return Jawapan.objects.filter(Soalan_id=Soalan_id).order_by('NoJawapan')
+
+    def filter_queryset(self, qs):
+
+        # Getting advanced filtering indicators for dataTables 1.10.13
+        search = self.request.GET.get(u'search[value]', "")
+        iSortCol_0 = self.request.GET.get(u'order[0][column]', "") # Column number 0,1,2,3,4
+        sSortDir_0 = self.request.GET.get(u'order[0][dir]', "") # asc, desc
+        
+        # Choose which column to sort
+        if iSortCol_0 == '1':
+          sortcol = 'DeskripsiJawapan'
+        # elif iSortCol_0 == '2':
+        #    sortcol = 'BUOrgChart'
+        else:
+           sortcol = 'DeskripsiJawapan'
+
+
+        # Choose which sorting direction : asc or desc
+        if sSortDir_0 == 'asc':
+          sortdir = ''
+        else:
+          sortdir = '-'
+
+        # Filtering if search value is key-in
+        if search:
+          # Initial Q parameter value
+          qs_params = None
+
+          # Filtering other fields
+          q = Q(DeskripsiJawapan__icontains=search)
+          qs_params = qs_params | q if qs_params else q
+   
+          # Completed Q queryset
+          # print qs_params
+          qs = qs.filter(qs_params)
+          # print 'qs :' + str(qs)
+          # print 'qs :'
+
+        # print 'sortdir + sortcol : ' + sortdir + sortcol
+        return qs.order_by(sortdir + sortcol)
+        # return qs
+
+    def prepare_results(self, qs):
+        # prepare list with output column data
+        # queryset is already paginated here
+        # json_data = {}
+        json_data = []
+
+        for i in range(len(qs)):
+            json_data.append([
+                i+1,
+                qs[i].NoJawapan,
+                qs[i].DeskripsiJawapan,
+                qs[i].Skala,
+                # qs[i].SubKomponen_id,
+                #qs[i].Status,
+                reverse_lazy('jawapan_edit',kwargs={'pk':qs[i].pk}),
+                reverse_lazy('jawapan_remove',kwargs={'pk':qs[i].pk}),
+                # reverse_lazy('soalan',kwargs={'pk':qs[i].pk}),
+                str(qs[i].pk),
+                
+            ])
+            # print(json_data)
+        return json_data   
+
+ 
+# Jawapan - Edit 
+def jawapan_edit(request,pk):
+
+    jawapan = get_object_or_404(Jawapan, pk=pk)
+    if request.method == "POST":
+        form = JawapanForm(request.POST,instance=jawapan)
+        if form.is_valid():
+            jawapan = form.save(commit=False)
+            jawapan.save()
+            # return redirect('post_detail', pk=post.pk)
+            messages.success(request, "Jawapan " + str(jawapan.NoJawapan) + " telah dikemaskini! ")
+            return redirect(reverse_lazy('jawapan_edit',kwargs={'pk':pk}))
+    else:
+        form = JawapanForm(instance=jawapan)
+    
+    return render(request, 'persediaan/jawapan_edit.html', {'form': form}) 
+
+# Jawapan - Tambah Data
+def jawapan_new(request,pk):
+
+    if request.method == "POST":
+        form = JawapanForm(request.POST)
+        if form.is_valid():
+            jawapan = form.save(commit=False)
+            jawapan.Soalan_id = int(pk)
+            jawapan.save()
+            messages.success(request, "Jawapan " + str(jawapan.NoJawapan) + " telah dicipta ! ")
+            # return redirect(reverse_lazy('zon_new'))
+            return redirect(reverse_lazy('komponen_home_json'))
+    else:
+        form = JawapanForm()
+    # print(request.user)
+        soalan = get_object_or_404(Soalan, pk=pk)
+        print(soalan)
+    return render(request, 'persediaan/jawapan_new.html', {'form': form, 'soalan': soalan} )
+
+
+# Jawapan - Hapus
+def jawapan_remove(request,pk):
+
+    jawapan = get_object_or_404(Jawapan, pk=pk)
+    # if request.method == "POST":
+    namaJawapan = jawapan.NoJawapan
+    jawapan.delete()
+    messages.success(request, "Jawapan : " + str(namaJawapan) + " telah dihapus! ")
+    return redirect(reverse_lazy('komponen_home_json')) 

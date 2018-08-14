@@ -48,4 +48,23 @@ urlpatterns = [
     # Soalan - Hapus Data
     url(r'^soalan/(?P<pk>\d+)/hapus/$', views.soalan_remove, name='soalan_remove'),
 
-]   
+
+# ------------------------------------------------------------------------------------------------------------
+
+    # Jawapan - Papar
+    url(r'^subkomponen/(?P<pk>\d+)/jawapan$', views.jawapan, name='jawapan'),
+
+    # Jawapan - List JSON
+    url(r'^list_jawapan_json/$',views.jawapan_list_json.as_view(), name="jawapan_list_json"),
+
+    # Jawapan - Edit
+    url(r'^jawapan/(?P<pk>\d+)/editjawapan$', views.jawapan_edit, name='jawapan_edit'),
+
+    # Jawapan - Tambah Data
+    url(r'^jawapan/new_jawapan/(?P<pk>\d+)/$', views.jawapan_new, name='jawapan_new'),
+
+    # Jawapan - Hapus Data
+    url(r'^jawapan/(?P<pk>\d+)/hapus/$', views.jawapan_remove, name='jawapan_remove'),
+
+
+] 

@@ -43,7 +43,7 @@ class Jawapan(models.Model):
 	DeskripsiJawapan = models.CharField('DeskripsiJawapan',max_length=200,blank=False,null=False)
 	Skala = models.IntegerField('Skala',blank=False,null=False, default=0)
 	Soalan = models.ForeignKey(Soalan,on_delete=models.CASCADE)
-	TarikhKemaskini = models.DateTimeField('TarikhKemaskini',max_length=60,blank=False,null=False)
+	#TarikhKemaskini = models.DateTimeField('TarikhKemaskini',max_length=60,blank=False,null=False)
 
 	def __str__(self):
 		return str (self.pk)
