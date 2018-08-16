@@ -1,22 +1,25 @@
 from django.db import models
 import urusetia
 import persediaan
+from django.utils import timezone
 
 
 
 class Sesi(models.Model):
 
-
 	BilSesi = models.IntegerField('BilSesi',unique = True,blank=False,null=False)
 	Tahun = models.IntegerField('Tahun',blank=False,null=False)
 	TarikhMula = models.DateField('TarikhMula',max_length=60,blank=False,null=False)
 	TarikhTamat = models.DateField('TarikhTamat',max_length=60,blank=False,null=False)
-	Status = models.CharField('TarikhTamat',max_length=60,blank=False,null=False)
-	TarikhKemaskini = models.DateTimeField('TarikhKemaskini',max_length=60,blank=False,null=False)
+	Status = models.IntegerField('StatusSesi',blank=False,null=False, default=1)
+	# TarikhKemaskini = models.DateTimeField('TarikhKemaskini',max_length=60,blank=True,null=True)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
+
 
 
 	def __str__(self):
-		return self.BilSesi
+		return str (self.pk)
 
 
 class Jadual(models.Model):

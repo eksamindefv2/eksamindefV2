@@ -3,8 +3,9 @@
 {% load i18n %}
 
 
-
-
+{% block title_navbar %}
+                    <a class="navbar-brand" href="#">Selenggara Sesi</a>
+                    {% endblock %}
 
 {% block sidebar %}
   <div class="sidebar" data-background-color="white" data-active-color="danger">
@@ -28,13 +29,13 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="active">
+                <li class="#">
                     <a href="{% url 'bahagian_home_json' %}">
                         <i class="ti-view-list-alt"></i>
                         <p>Selenggara Bahagian</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="#">
                         <i class="ti-text"></i>
                         <p>Selenggara Sesi Audit</p>
@@ -75,8 +76,8 @@
   <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Senarai Bahagian</h4>
-            <p class="category">Jadual memaparkan senarai bahagian yang terlibat dengan EKSA</p>
+            <h4 class="title">Senarai Sesi</h4>
+            <p class="category">Jadual memaparkan senarai sesi yang terlibat dengan EKSA</p>
         </div>
         <div class="content table-responsive">
           <br>
@@ -87,8 +88,12 @@
         <tr>
 <!--           <th>{% trans "IC Number" %}</th> -->
           <th>{% trans "Bil." %}</th>
-          <th>{% trans "Bahagian" %}</th>
-          <th>{% trans "BUOrgChart" %}</th>
+          <th>{% trans "Sesi" %}</th>
+          <th>{% trans "Tahun" %}</th>
+          <th>{% trans "Tarikh Mula" %}</th>
+          <th>{% trans "Tarikh Tamat" %}</th>
+          <th>{% trans "Status" %}</th>
+          <th>{% trans "Tarikh Daftar Sesi" %}</th>
           <th>{% trans "Tindakan" %}</th>
         </tr>
      </thead>
@@ -96,8 +101,8 @@
   </div>
 
   <p class="text-center">
-    <a href="{% url 'bahagian_new' %}" class="btn btn-primary" >Tambah Bahagian</a>
-  </p>
+    <a href="{% url 'sesi_new'%}" class="btn btn-primary" >Tambah Sesi</a>
+</p>
 
 {% endblock %}
 
@@ -126,21 +131,26 @@
       $('#example').DataTable( {
         "processing": true,
         "serverSide": true,
-        "ajax": '{% url "bahagian_list_json" %}',
+        "ajax": '{% url "sesi_list_json" %}',
         "columnDefs": [ 
         {
-          "targets": 3,
+          "targets": 7,
           "className": "text-center",
           "orderable": false,
           "render": function ( data, type, full, meta ) {
-            return '<a href=' + full[3] +' title="Kemaskini"><i class="fa fa-pencil text-primary fa-lg"></i></a>';
+            return '<a href=' + full[8] +' title="Kemaskini"><i class="fa fa-pencil text-primary fa-lg"></i></a>';
             }
 
         },
         {
-          "targets": 1,
+          "targets": 5,
+          "className": "text-center",
           "render": function ( data, type, full, meta ) {
-             return '<a href=' + full[5] +'>'+data+'</a>';
+            if(data==1)
+              return '<span class="label label-primary">Aktif</span>';
+            else
+              return '<span class="label label-danger">Tidak Aktif</span>';
+             return status;
             }
         }
 

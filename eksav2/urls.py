@@ -22,6 +22,7 @@ urlpatterns = [
     # path('', include('urusetia.urls')),
     path('urusetia/', include('urusetia.urls')),
     path('persediaan/', include('persediaan.urls')),
+    path('penilaian/', include('penilaian.urls')),
     path('urusetia/', include('django.contrib.auth.urls')),
     
 
