@@ -19,6 +19,7 @@ class Sesi(models.Model):
 
 
 	def __str__(self):
+		return str(self.BilSesi)
 		return str (self.pk)
 
 
@@ -40,12 +41,14 @@ class Jadual(models.Model):
 	IDZon = models.ForeignKey('urusetia.Zon',on_delete=models.CASCADE)
 	BilSesi = models.ForeignKey(Sesi,on_delete=models.CASCADE)
 	NamaJuruAudit =  models.ForeignKey('auth.User',on_delete=models.CASCADE)
-	TarikhAudit = models.DateTimeField('TarikhAudit',max_length=60,blank=False,null=False)
-	Status = models.CharField('Status',max_length=60,blank=False,null=False)
+	# TarikhAudit = models.DateTimeField('TarikhAudit',max_length=60,blank=False,null=False)
+	Status = models.IntegerField('Status',blank=False,null=False, default=1)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
 
 
 	def __str__(self):
-		return self.BilJadual		
+		return str (self.pk)	
 
 
 class Skor(models.Model):

@@ -21,7 +21,10 @@ class Zon(models.Model):
 	Bahagian = models.ForeignKey(Bahagian,on_delete=models.CASCADE)
 
 	def __str__(self):
+		# Return NamaZon untuk foreign drop down
+		return self.NamaZon
 		return str (self.pk)
+    
 		# return self.NamaZon
 		# return self.BUOrgChart
 
