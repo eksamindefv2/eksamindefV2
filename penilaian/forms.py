@@ -26,7 +26,7 @@ class SesiForm(forms.ModelForm):
 
     class Meta:
         model = Sesi
-        fields = ['BilSesi', 'Tahun','TarikhMula','TarikhTamat','Status']
+        fields = ['BilSesi', 'Tahun','TarikhMula','TarikhTamat','JumlahSkala','Status']
         widgets = {
             'TarikhMula': forms.DateInput(attrs={'id':'datepicker'}),
             'TarikhTamat': forms.DateInput(attrs={'id':'datepicker2'}),
@@ -60,8 +60,8 @@ class JadualForm(forms.ModelForm):
         self.helper.layout.append(HTML('<a class="btn btn-primary" href={% url "jadual_home" %}>Kembali</a>'))
 
         # Filter Dropdown by Zon
-        self.fields['IDZon']=forms.ModelChoiceField(queryset=Zon.objects.filter(Bahagian_id='1'))
-
+        # self.fields['IDZon']=forms.ModelChoiceField(queryset=Zon.objects.filter(Bahagian_id='1'))
+        # self.fields['IDZon'].queryset = Zon.objects.none()
         # zon = forms.ModelChoiceField(queryset=models.Zon.objects.all())
 
     class Meta:

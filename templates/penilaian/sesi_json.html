@@ -92,6 +92,7 @@
           <th>{% trans "Tahun" %}</th>
           <th>{% trans "Tarikh Mula" %}</th>
           <th>{% trans "Tarikh Tamat" %}</th>
+          <th>{% trans "Skala" %}</th>
           <th>{% trans "Status" %}</th>
           <th>{% trans "Tarikh Daftar Sesi" %}</th>
           <th>{% trans "Tindakan" %}</th>
@@ -144,6 +145,10 @@
         },
         {
           "targets": 5,
+          "className": "text-center"
+        },
+        {
+          "targets": 6,
           "className": "text-center",
           "render": function ( data, type, full, meta ) {
             if(data==1)

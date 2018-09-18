@@ -39,7 +39,7 @@ class Soalan(models.Model):
 
 class Jawapan(models.Model):
 
-	NoJawapan = models.CharField('NoJawapan',unique = True,max_length=10,blank=False,null=False)
+	NoJawapan = models.CharField('NoJawapan',max_length=10,blank=False,null=False)
 	DeskripsiJawapan = models.CharField('DeskripsiJawapan',max_length=200,blank=False,null=False)
 	Skala = models.IntegerField('Skala',blank=False,null=False, default=0)
 	Soalan = models.ForeignKey(Soalan,on_delete=models.CASCADE)

@@ -1,6 +1,7 @@
 from django.urls import reverse
 from .models import Sesi,Jadual
 from urusetia.models import Zon
+from persediaan.models import SubKomponen, Soalan
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -82,6 +83,7 @@ class sesi_list_json(BaseDatatableView):
                 qs[i].Tahun,
                 qs[i].TarikhMula,
                 qs[i].TarikhTamat,
+                qs[i].JumlahSkala,
                 qs[i].Status,
                 qs[i].created_at,
                 qs[i].id,
@@ -250,4 +252,7 @@ def jadual_edit(request,pk):
     
     return render(request, 'penilaian/jadual_edit.html', {'form': form})
 
+
+
+# _____________________________________________________________________________________________________________________
 

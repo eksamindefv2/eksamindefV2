@@ -11,6 +11,7 @@ class Sesi(models.Model):
 	Tahun = models.IntegerField('Tahun',blank=False,null=False)
 	TarikhMula = models.DateField('TarikhMula',max_length=60,blank=False,null=False)
 	TarikhTamat = models.DateField('TarikhTamat',max_length=60,blank=False,null=False)
+	JumlahSkala = models.IntegerField('JumlahSkala',blank=False,null=False)
 	Status = models.IntegerField('StatusSesi',blank=False,null=False, default=1)
 	# TarikhKemaskini = models.DateTimeField('TarikhKemaskini',max_length=60,blank=True,null=True)
 	created_at = models.DateTimeField(auto_now_add=True)
